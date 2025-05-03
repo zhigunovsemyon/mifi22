@@ -60,6 +60,19 @@ static enum ArmstongResult armstong_wrap(int n)
 	return check_armstrong(n, &dumb);
 }
 
+static int sum_of_digits (int num)
+{
+	int count = count_digits(num);
+	int sum = get_nth_digit(num, 0);
+	assert(count >= 0);
+
+	for (int i = 1; i < count; ++i)
+		sum += get_nth_digit(num,i);
+
+	assert(sum >= 0);
+	return sum;
+}
+
 bool modify_array(int ** arr, int * plen, int min)
 {
 	if (!arr || !plen)
@@ -68,7 +81,7 @@ bool modify_array(int ** arr, int * plen, int min)
 		return true;
 
 	for (int *ptr, i = 0; i < *plen; ++i) {
-		if ((*arr)[i] < min) {
+		if (sum_of_digits((*arr)[i]) < min) {
 			assert(*plen > 0);
 			assert(*plen > i);
 			memmove((*arr) + i, (*arr) + i + 1,
