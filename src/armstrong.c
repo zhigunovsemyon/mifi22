@@ -1,7 +1,7 @@
 #include "armstrong.h"
 #include <assert.h>
 
-static int count_digits(int n)
+int count_digits(int n)
 {
 	int res = 1;
 	while (n >= 10)
@@ -22,7 +22,7 @@ static int powi(int n, int p)
 
 /*Отсчёт идёт от 0, от младших разрядов к старшим.
  * Не предусматривает проверки на корректность*/
-inline static int get_nth_digit(int n, int i)
+int get_nth_digit(int n, int i)
 {
 	return (n / powi(10, i)) % 10;
 }

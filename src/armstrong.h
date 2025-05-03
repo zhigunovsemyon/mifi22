@@ -11,4 +11,10 @@ enum ArmstongResult {
 /*Функция проверки числа*/
 enum ArmstongResult check_armstrong(int num, int * sum);
 
+/*Отсчёт идёт от 0, от младших разрядов к старшим.
+ * Не предусматривает проверки на корректность*/
+int get_nth_digit(int n, int i);
+
+int count_digits(int n);
+
 #endif // !ARMSTRONG_H_
