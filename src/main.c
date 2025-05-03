@@ -1,6 +1,6 @@
 /*=============================================================================
 Условие
-Написать функцию, которая для передающегося ей в качестве параметра массива 
+Написать функцию, которая для передающегося ей в качестве параметра массива
 целых чисел выполняет следующие действия:
 	- удаляет из массива все числа, сумма цифр в записи которых не
 превышает некоторое число n (передаётся в функцию в качестве параметра);
@@ -19,31 +19,25 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// #define INT_MAX 2'147'483'647
-
 int main(void)
 {
-	int *nums;
+	int *nums, min;
+
+	printf("Введите минимальное число: ");
+	if (1 != scanf("%d", &min))
+		return EXIT_SUCCESS;
+
 	int count = get_array(&nums);
-	print_array(nums,count);
-	modify_array(&nums, &count,10);
-	print_array(nums,count);
-	//
-	// switch (check_armstrong(num, &sum)) {
-	// case ARMSTRONG_FALSE:
-	// 	puts("Проанализированное число не является числом Армстронга");
-	// 	break;
-	// case ARMSTRONG_TRUE:
-	// 	puts("Проанализированное число является числом Армстронга");
-	// 	break;
-	// case ARMSTRONG_FAIL:
-	// 	fputs("Ошибка в процессе анализа переданного числа\n", stderr);
-	// 	return EXIT_FAILURE;
-	// }
-	//
-	// printf("Исходное число: %d, результат расчёта: %d\n", num, sum);
+	if (count < 0)
+		return EXIT_FAILURE;
+
+	print_array(nums, count);
+
+	if(modify_array(&nums, &count, min))
+		return EXIT_FAILURE;
+
+	print_array(nums, count);
 
 	free(nums);
 	return EXIT_SUCCESS;
 }
-
