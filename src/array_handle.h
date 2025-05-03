@@ -6,6 +6,9 @@
  * Возвращает размер массива, либо -1 при ошибке*/
 int get_array (int **);
 
-void print_array (int *, int len);
+void print_array (int const *, int len);
+
+/*Модификация массива в соответствии с задачей*/
+bool modify_array(int **, int * plen);
 
 #endif 

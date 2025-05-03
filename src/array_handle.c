@@ -43,7 +43,7 @@ int get_array(int ** arr)
 	} while (true);
 }
 
-void print_array(int * arr, int len)
+void print_array(int const * arr, int len)
 {
 	putchar('\n');
 	for (int i = 0; i < len; ++i)
