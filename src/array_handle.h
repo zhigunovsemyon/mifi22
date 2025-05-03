@@ -9,6 +9,6 @@ int get_array (int **);
 void print_array (int const *, int len);
 
 /*Модификация массива в соответствии с задачей*/
-bool modify_array(int **, int * plen);
+bool modify_array(int **, int * plen, int min);
 
 #endif 

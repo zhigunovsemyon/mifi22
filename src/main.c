@@ -26,7 +26,7 @@ int main(void)
 	int *nums;
 	int count = get_array(&nums);
 	print_array(nums,count);
-	modify_array(&nums, &count);
+	modify_array(&nums, &count,10);
 	print_array(nums,count);
 	//
 	// switch (check_armstrong(num, &sum)) {

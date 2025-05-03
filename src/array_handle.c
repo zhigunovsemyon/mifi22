@@ -60,7 +60,7 @@ static enum ArmstongResult armstong_wrap(int n)
 	return check_armstrong(n, &dumb);
 }
 
-bool modify_array(int ** arr, int * plen)
+bool modify_array(int ** arr, int * plen, int min)
 {
 	if (!arr || !plen)
 		return true;
@@ -68,6 +68,17 @@ bool modify_array(int ** arr, int * plen)
 		return true;
 
 	for (int *ptr, i = 0; i < *plen; ++i) {
+		if ((*arr)[i] < min) {
+			assert(*plen > 0);
+			assert(*plen > i);
+			memmove((*arr) + i, (*arr) + i + 1,
+				size_int * (size_t)(--(*plen) - i));
+
+			/*Отброс назад на тот же индекс*/
+			--i;
+			continue;
+		}
+
 		/*Если число не является числом Армстронга, переход к
 		 * следующему*/
 		if (ARMSTRONG_TRUE != armstong_wrap((*arr)[i]))
