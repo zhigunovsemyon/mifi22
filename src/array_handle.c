@@ -1,8 +1,11 @@
 #include "array_handle.h"
+#include "armstrong.h"
 #include <assert.h>
 #include <malloc.h>
 #include <stddef.h>
+#include <string.h>
 
+constexpr size_t size_int = sizeof(int);
 constexpr int STEP = 32;
 
 int get_array(int ** arr)
@@ -26,7 +29,7 @@ int get_array(int ** arr)
 		/*Если место в выделенной памяти заканчивается*/
 		if (capacity < len + 1) {
 			int * ptr = (int *)realloc(
-				*arr, sizeof(int) * (size_t)(capacity += STEP));
+				*arr, size_int * (size_t)(capacity += STEP));
 			if (!ptr) {
 				/*Освобождение памяти старого указателя*/
 				free(*arr);
@@ -49,4 +52,42 @@ void print_array(int const * arr, int len)
 	for (int i = 0; i < len; ++i)
 		printf("%d ", arr[i]);
 	putchar('\n');
+}
+
+static enum ArmstongResult armstong_wrap(int n)
+{
+	int dumb;
+	return check_armstrong(n, &dumb);
+}
+
+bool modify_array(int ** arr, int * plen)
+{
+	if (!arr || !plen)
+		return true;
+	if (!(*arr))
+		return true;
+
+	for (int *ptr, i = 0; i < *plen; ++i) {
+		/*Если число не является числом Армстронга, переход к
+		 * следующему*/
+		if (ARMSTRONG_TRUE != armstong_wrap((*arr)[i]))
+			continue;
+
+		ptr = (int *)realloc(*arr, size_int * (size_t)(++(*plen)));
+		if (!ptr) {
+			/*Освобождение памяти старого указателя*/
+			free(*arr);
+			/*Возврат кода ошибки при нехватке памяти*/
+			return true;
+		}
+		*arr = ptr;
+		assert(*arr != nullptr);
+
+		assert((*plen - i - 1) >= 0);
+		memmove(*arr + i + 1, *arr + i,
+			size_int * (size_t)(*plen - i - 1));
+		/* (*arr)[i]=(*arr)[i + 1]; нет нужды из-за работы memmove() */
+		i++; /*Перескок на следующий элемент*/
+	}
+	return false;
 }
