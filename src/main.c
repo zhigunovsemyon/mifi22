@@ -23,9 +23,9 @@ int main(void)
 {
 	int *nums, min;
 
-	printf("Введите минимальное число: ");
+	printf("Введите минимальную сумму чисел: ");
 	if (1 != scanf("%d", &min))
-		return EXIT_SUCCESS;
+		return EXIT_FAILURE;
 
 	int count = get_array(&nums);
 	if (count < 0)
